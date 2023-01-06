@@ -14,15 +14,20 @@ namespace Unit.Editor.PropertyDrawers
             {
                 var usableArea = EditorGUI.PrefixLabel(area, GUIUtility.GetControlID(FocusType.Passive), label);
 
+                bool Compact()
+                {
+                    return usableArea.width < 500;
+                }
+
                 var properties = new UnitSerializedProperty[]
                 {
-                    new UnitSerializedProperty("year", property.FindPropertyRelative(nameof(UDateTime.Year))),
-                    new UnitSerializedProperty("month", property.FindPropertyRelative(nameof(UDateTime.Month))),
-                    new UnitSerializedProperty("day", property.FindPropertyRelative(nameof(UDateTime.Day))),
-                    new UnitSerializedProperty("hour", property.FindPropertyRelative(nameof(UDateTime.Hour))),
-                    new UnitSerializedProperty("minute", property.FindPropertyRelative(nameof(UDateTime.Minute))),
-                    new UnitSerializedProperty("second", property.FindPropertyRelative(nameof(UDateTime.Second))),
-                    new UnitSerializedProperty(string.Empty, property.FindPropertyRelative(nameof(UDateTime.Kind))),
+                    new UnitSerializedProperty("year", property.FindPropertyRelative(nameof(UDateTime.Year)), Compact),
+                    new UnitSerializedProperty("month", property.FindPropertyRelative(nameof(UDateTime.Month)), Compact),
+                    new UnitSerializedProperty("day", property.FindPropertyRelative(nameof(UDateTime.Day)), Compact),
+                    new UnitSerializedProperty("hour", property.FindPropertyRelative(nameof(UDateTime.Hour)), Compact),
+                    new UnitSerializedProperty("minute", property.FindPropertyRelative(nameof(UDateTime.Minute)), Compact),
+                    new UnitSerializedProperty("second", property.FindPropertyRelative(nameof(UDateTime.Second)), Compact),
+                    new UnitSerializedProperty(string.Empty, property.FindPropertyRelative(nameof(UDateTime.Kind)), Compact),
                 };
 
                 var cells = new Cell[]
