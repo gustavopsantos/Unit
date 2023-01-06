@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.madsbangh.easybuttons": {
-      "version": "https://github.com/madsbangh/EasyButtons.git#upm",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "39da70419a2dc9ce0059b40dd64abcdfcef58ea1"
-    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
@@ -15,7 +8,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.15",
+      "version": "3.0.17",
       "depth": 0,
       "source": "registry",
       "dependencies": {
