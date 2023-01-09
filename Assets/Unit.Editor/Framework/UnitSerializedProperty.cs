@@ -12,10 +12,10 @@ namespace Unit.Editor.Framework
         private readonly SerializedProperty _serializedProperty;
         private readonly Func<bool> _compact;
 
-        public UnitSerializedProperty(string label, SerializedProperty serializedProperty, Func<bool> compact)
+        public UnitSerializedProperty(string label, string abbreviation, SerializedProperty serializedProperty, Func<bool> compact)
         {
             _label = new GUIContent(label);
-            _abbreviation = string.IsNullOrEmpty(label) ? GUIContent.none : new GUIContent(label[0].ToString());
+            _abbreviation = new GUIContent(abbreviation);
             _serializedProperty = serializedProperty;
             _compact = compact;
         }

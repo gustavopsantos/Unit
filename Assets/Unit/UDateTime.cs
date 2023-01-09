@@ -11,6 +11,8 @@ namespace Unit
         public int Hour;
         public int Minute;
         public int Second;
+        public int Millisecond;
+        public long Ticks;
         public DateTimeKind Kind;
     }
 }

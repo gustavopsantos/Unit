@@ -1,3 +1,4 @@
+using System;
 using Unit.Editor.Framework;
 using Unit.Editor.Scopes;
 using UnityEditor;
@@ -14,24 +15,29 @@ namespace Unit.Editor.PropertyDrawers
             {
                 var usableArea = EditorGUI.PrefixLabel(area, GUIUtility.GetControlID(FocusType.Passive), label);
 
+                Debug.LogError(usableArea.width);
                 bool Compact()
                 {
-                    return usableArea.width < 500;
+                    return usableArea.width < 800;
                 }
 
                 var properties = new UnitSerializedProperty[]
                 {
-                    new UnitSerializedProperty("year", property.FindPropertyRelative(nameof(UDateTime.Year)), Compact),
-                    new UnitSerializedProperty("month", property.FindPropertyRelative(nameof(UDateTime.Month)), Compact),
-                    new UnitSerializedProperty("day", property.FindPropertyRelative(nameof(UDateTime.Day)), Compact),
-                    new UnitSerializedProperty("hour", property.FindPropertyRelative(nameof(UDateTime.Hour)), Compact),
-                    new UnitSerializedProperty("minute", property.FindPropertyRelative(nameof(UDateTime.Minute)), Compact),
-                    new UnitSerializedProperty("second", property.FindPropertyRelative(nameof(UDateTime.Second)), Compact),
-                    new UnitSerializedProperty(string.Empty, property.FindPropertyRelative(nameof(UDateTime.Kind)), Compact),
+                    new UnitSerializedProperty("year", "y", property.FindPropertyRelative(nameof(UDateTime.Year)), Compact),
+                    new UnitSerializedProperty("month", "m", property.FindPropertyRelative(nameof(UDateTime.Month)), Compact),
+                    new UnitSerializedProperty("day", "d", property.FindPropertyRelative(nameof(UDateTime.Day)), Compact),
+                    new UnitSerializedProperty("hour", "h", property.FindPropertyRelative(nameof(UDateTime.Hour)), Compact),
+                    new UnitSerializedProperty("minute", "m", property.FindPropertyRelative(nameof(UDateTime.Minute)), Compact),
+                    new UnitSerializedProperty("second", "s", property.FindPropertyRelative(nameof(UDateTime.Second)), Compact),
+                    new UnitSerializedProperty("millisecond", "ms", property.FindPropertyRelative(nameof(UDateTime.Millisecond)), Compact),
+                    new UnitSerializedProperty("ticks", "t", property.FindPropertyRelative(nameof(UDateTime.Ticks)), Compact),
+                    new UnitSerializedProperty("", "", property.FindPropertyRelative(nameof(UDateTime.Kind)), Compact),
                 };
 
                 var cells = new Cell[]
                 {
+                    new Cell(),
+                    new Cell(),
                     new Cell(),
                     new Cell(),
                     new Cell(),
