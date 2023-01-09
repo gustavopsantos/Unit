@@ -15,7 +15,6 @@ namespace Unit.Editor.PropertyDrawers
             {
                 var usableArea = EditorGUI.PrefixLabel(area, GUIUtility.GetControlID(FocusType.Passive), label);
 
-                Debug.LogError(usableArea.width);
                 bool Compact()
                 {
                     return usableArea.width < 800;
