@@ -168,22 +168,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dateTime:
-    Year: 2023
-    Month: 1
-    Day: 1
-    Hour: 0
-    Minute: 0
-    Second: 0
-    Millisecond: 0
-    Ticks: 0
-    Kind: 0
-  _dateTimeArray:
-  - Year: 2023
-    Month: 1
-    Day: 1
-    Hour: 0
-    Minute: 0
-    Second: 0
-    Millisecond: 0
-    Ticks: 0
-    Kind: 0
+    _serialized: 2023-10-25T20:00:00.0000000-03:00

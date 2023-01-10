@@ -6,6 +6,16 @@ namespace Unit.Editor.Utilities
 {
     internal static class GUIUtilities
     {
+        public static int IntField(GUIContent label, Rect area, int value)
+        {
+            var labelStyle = EditorStyles.label;
+            labelStyle.normal.textColor = Color.gray;
+            var labelRect = CalculateCellLabelRect(area, label, labelStyle);
+            var newValue = EditorGUI.IntField(area, GUIContent.none, value);
+            EditorGUI.LabelField(labelRect, label, labelStyle);
+            return newValue;
+        }
+        
         public static void InnerLabeledProperty(GUIContent label, Rect area, SerializedProperty property)
         {
             var labelStyle = EditorStyles.label;
