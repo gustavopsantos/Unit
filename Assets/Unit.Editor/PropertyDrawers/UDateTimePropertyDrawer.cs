@@ -3,6 +3,7 @@ using Unit.Editor.Framework;
 using Unit.Editor.Scopes;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Unit.Editor.PropertyDrawers
 {
@@ -50,9 +51,12 @@ namespace Unit.Editor.PropertyDrawers
                 {
                     var rects = CellFramework.GetRects(3, usableArea, cells);
 
-                    for (var i = 0; i < properties.Length; i++)
+                    using (new GUIColorScope(Random.Range(0, 2) == 0 ? Color.red : Color.white))
                     {
-                        properties[i].Present(rects[i]);
+                        for (var i = 0; i < properties.Length; i++)
+                        {
+                            properties[i].Present(rects[i]);
+                        }
                     }
                 }
             }

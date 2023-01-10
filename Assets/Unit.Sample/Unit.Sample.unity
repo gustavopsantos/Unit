@@ -169,157 +169,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dateTime:
     Year: 2023
-    Month: 40
-    Day: 9
-    Hour: 15
+    Month: 1
+    Day: 1
+    Hour: 0
     Minute: 0
     Second: 0
     Millisecond: 0
     Ticks: 0
-    Kind: 1
+    Kind: 0
   _dateTimeArray:
-  - Year: 0
-    Month: 0
-    Day: 0
+  - Year: 2023
+    Month: 1
+    Day: 1
     Hour: 0
     Minute: 0
     Second: 0
     Millisecond: 0
     Ticks: 0
     Kind: 0
-  - Year: 0
-    Month: 0
-    Day: 0
-    Hour: 0
-    Minute: 0
-    Second: 0
-    Millisecond: 0
-    Ticks: 0
-    Kind: 0
-  _dateTimeList:
-  - Year: 0
-    Month: 0
-    Day: 0
-    Hour: 0
-    Minute: 0
-    Second: 0
-    Millisecond: 0
-    Ticks: 0
-    Kind: 0
-  - Year: 0
-    Month: 0
-    Day: 0
-    Hour: 0
-    Minute: 0
-    Second: 0
-    Millisecond: 0
-    Ticks: 0
-    Kind: 0
-  _event:
-    Name: 
-    StartsAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-    FinishesAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-  _eventArray:
-  - Name: 
-    StartsAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-    FinishesAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-  - Name: 
-    StartsAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-    FinishesAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-  _eventList:
-  - Name: 
-    StartsAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-    FinishesAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-  - Name: 
-    StartsAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
-    FinishesAt:
-      Year: 0
-      Month: 0
-      Day: 0
-      Hour: 0
-      Minute: 0
-      Second: 0
-      Millisecond: 0
-      Ticks: 0
-      Kind: 0
