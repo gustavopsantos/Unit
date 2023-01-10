@@ -37,7 +37,7 @@ namespace Unit.Editor.PropertyDrawers
                 var hourLabel = compact ? new GUIContent("H") : new GUIContent("Hour");
                 var minuteLabel = compact ? new GUIContent("M") : new GUIContent("Minute");
                 var secondLabel = compact ? new GUIContent("S") : new GUIContent("Second");
-                
+
                 // var properties = new UnitSerializedProperty[]
                 // {
                 //     new UnitSerializedProperty("year", "y", property.FindPropertyRelative(nameof(UDateTime.Year)), Compact),
@@ -67,17 +67,13 @@ namespace Unit.Editor.PropertyDrawers
                     using (new IndentedScope(0)) // Prevents nested fields to be indented
                     {
                         var rects = CellFramework.GetRects(3, usableArea, cells);
-
-                        using (new GUIColorScope(Random.Range(0, 2) == 0 ? Color.red : Color.white))
-                        {
-                            _year = GUIUtilities.IntField(yearLabel, rects[0], dateTime.Year);
-                            _month = GUIUtilities.IntField(monthLabel, rects[1], dateTime.Month);
-                            _day = GUIUtilities.IntField(dayLabel, rects[2], dateTime.Day);
-                            _hour = GUIUtilities.IntField(hourLabel, rects[3], dateTime.Hour);
-                            _minute = GUIUtilities.IntField(minuteLabel, rects[4], dateTime.Minute);
-                            _second = GUIUtilities.IntField(secondLabel, rects[5], dateTime.Second);
-                            _kind = (DateTimeKind) EditorGUI.EnumPopup(rects[6], dateTime.Kind);
-                        }
+                        _year = GUIUtilities.IntField(yearLabel, rects[0], dateTime.Year);
+                        _month = GUIUtilities.IntField(monthLabel, rects[1], dateTime.Month);
+                        _day = GUIUtilities.IntField(dayLabel, rects[2], dateTime.Day);
+                        _hour = GUIUtilities.IntField(hourLabel, rects[3], dateTime.Hour);
+                        _minute = GUIUtilities.IntField(minuteLabel, rects[4], dateTime.Minute);
+                        _second = GUIUtilities.IntField(secondLabel, rects[5], dateTime.Second);
+                        _kind = (DateTimeKind) EditorGUI.EnumPopup(rects[6], dateTime.Kind);
                     }
                 }
                 var changed = EditorGUI.EndChangeCheck();
