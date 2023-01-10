@@ -5,7 +5,6 @@ using Unit.Editor.Scopes;
 using Unit.Editor.Utilities;
 using UnityEditor;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Unit.Editor.PropertyDrawers
 {
@@ -25,7 +24,7 @@ namespace Unit.Editor.PropertyDrawers
             var uDateTime = property.As<UDateTime>();
             var dateTime = (DateTime) uDateTime;
 
-            using (new PropertyScope(area, label, property))
+            using (new SerializedPropertyScope(area, label, property))
             {
                 var usableArea = EditorGUI.PrefixLabel(area, GUIUtility.GetControlID(FocusType.Passive), label);
 
