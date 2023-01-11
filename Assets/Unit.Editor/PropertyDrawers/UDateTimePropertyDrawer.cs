@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Unit.Editor.Extensions;
 using Unit.Editor.Framework;
 using Unit.Editor.Scopes;
@@ -11,6 +12,8 @@ namespace Unit.Editor.PropertyDrawers
     [CustomPropertyDrawer(typeof(UDateTime))]
     public class UDateTimePropertyDrawer : UnitPropertyDrawer
     {
+        private Cell[] _cells;
+        
         private int _year;
         private int _month;
         private int _day;
@@ -28,6 +31,7 @@ namespace Unit.Editor.PropertyDrawers
         private Label _secondLabel;
         private Label _millisecondLabel;
 
+
         protected override void Initialize(SerializedProperty property)
         {
             _yearLabel = new Label("Year", "Y");
@@ -37,6 +41,8 @@ namespace Unit.Editor.PropertyDrawers
             _minuteLabel = new Label("Minute", "M");
             _secondLabel = new Label("Second", "S");
             _millisecondLabel = new Label("Millisecond", "MS");
+
+            _cells = GenerateCells(default);
         }
 
         private static UDateTime.Precision GetPrecision(SerializedProperty property)
@@ -44,6 +50,11 @@ namespace Unit.Editor.PropertyDrawers
             return property.TryGetAttribute<UDateTime.PrecisionAttribute>(out var precisionAttribute)
                 ? precisionAttribute.Precision
                 : UDateTime.Precision.Hour;
+        }
+
+        private static Cell[] GenerateCells(UDateTime.Precision precision)
+        {
+            return Enumerable.Range(0, 7).Select(_ => new Cell()).Concat(new Cell(90).Yield()).ToArray();
         }
 
         protected override void Present(Rect area, SerializedProperty property, GUIContent label)
@@ -58,23 +69,11 @@ namespace Unit.Editor.PropertyDrawers
 
                 var compact = usableArea.width < 520;
 
-                var cells = new Cell[]
-                {
-                    new Cell(), // Year
-                    new Cell(), // Month
-                    new Cell(), // Day
-                    new Cell(), // Hour
-                    new Cell(), // Minute
-                    new Cell(), // Second
-                    new Cell(), // Millisecond
-                    new Cell(90), // Kind
-                };
-
                 EditorGUI.BeginChangeCheck();
                 {
                     using (new IndentedScope(0)) // Prevents nested fields to be indented
                     {
-                        var rects = CellFramework.GetRects(3, usableArea, cells);
+                        var rects = CellFramework.GetRects(3, usableArea, _cells);
                         _year = GUIUtilities.IntField(_yearLabel.Get(compact), rects[0], dateTime.Year);
                         _month = GUIUtilities.IntField(_monthLabel.Get(compact), rects[1], dateTime.Month);
                         _day = GUIUtilities.IntField(_dayLabel.Get(compact), rects[2], dateTime.Day);
@@ -99,7 +98,7 @@ namespace Unit.Editor.PropertyDrawers
         {
             try
             {
-                dateTime = new DateTime(_year, _month, _day, _hour, _minute, _second, 0, _kind);
+                dateTime = new DateTime(_year, _month, _day, _hour, _minute, _second, _millisecond, _kind);
                 return true;
             }
             catch (Exception e)
@@ -113,7 +112,7 @@ namespace Unit.Editor.PropertyDrawers
         {
             try
             {
-                var dt = new DateTime(_year, _month, _day, _hour, _minute, _second, 0, _kind);
+                var dt = new DateTime(_year, _month, _day, _hour, _minute, _second, _millisecond, _kind);
                 return true;
             }
             catch (Exception)
