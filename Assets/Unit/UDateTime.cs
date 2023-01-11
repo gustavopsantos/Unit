@@ -6,6 +6,28 @@ namespace Unit
     [Serializable]
     public struct UDateTime : ISerializationCallbackReceiver
     {
+        public enum Precision
+        {
+            Year,
+            Month,
+            Day,
+            Hour,
+            Minute,
+            Second,
+            Millisecond
+        }
+        
+        [AttributeUsage(AttributeTargets.Field)]
+        public class PrecisionAttribute : Attribute
+        {
+            public Precision Precision { get; }
+
+            public PrecisionAttribute(Precision precision)
+            {
+                Precision = precision;
+            }
+        }
+        
         private DateTime _dateTime;
         [SerializeField] private string _dateTimeString; // ISO 8601 format
 

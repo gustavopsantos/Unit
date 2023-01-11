@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using UnityEditor;
 
 namespace Unit.Editor.Extensions
@@ -19,6 +20,14 @@ namespace Unit.Editor.Extensions
             var declaringType = serializedProperty.serializedObject.targetObject.GetType();
             var fieldInfo = declaringType.GetField(serializedProperty.propertyPath, Flags);
             fieldInfo.SetValue(serializedProperty.serializedObject.targetObject, value);
+        }
+        
+        public static bool TryGetAttribute<T>(this SerializedProperty serializedProperty, out T attribute) where T : Attribute
+        {
+            var declaringType = serializedProperty.serializedObject.targetObject.GetType();
+            var fieldInfo = declaringType.GetField(serializedProperty.propertyPath, Flags);
+            attribute = fieldInfo.GetCustomAttribute<T>();
+            return attribute != null;
         }
     }
 }

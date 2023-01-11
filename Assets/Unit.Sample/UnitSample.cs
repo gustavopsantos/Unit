@@ -4,7 +4,9 @@ namespace Unit.Sample
 {
     public class UnitSample : MonoBehaviour
     {
-        [SerializeField] private UDateTime _dateTime;
+        [field: SerializeField] public UDateTime _dateTime { get; private set; }
+        
+        
         // [SerializeField] private UDateTime[] _dateTimeArray;
         // [SerializeField] private List<UDateTime> _dateTimeList;
 
