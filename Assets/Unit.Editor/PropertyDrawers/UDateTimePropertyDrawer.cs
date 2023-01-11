@@ -31,6 +31,7 @@ namespace Unit.Editor.PropertyDrawers
         private Label _secondLabel;
         private Label _millisecondLabel;
 
+        private UDateTime.Precision _precision;
 
         protected override void Initialize(SerializedProperty property)
         {
@@ -42,7 +43,8 @@ namespace Unit.Editor.PropertyDrawers
             _secondLabel = new Label("Second", "S");
             _millisecondLabel = new Label("Millisecond", "MS");
 
-            _cells = GenerateCells(default);
+            _precision = GetPrecision(property);
+            _cells = GenerateCells(_precision);
         }
 
         private static UDateTime.Precision GetPrecision(SerializedProperty property)
@@ -54,14 +56,17 @@ namespace Unit.Editor.PropertyDrawers
 
         private static Cell[] GenerateCells(UDateTime.Precision precision)
         {
-            return Enumerable.Range(0, 7).Select(_ => new Cell()).Concat(new Cell(90).Yield()).ToArray();
+            return Enumerable
+                .Range(0, ((int) precision) + 1)
+                .Select(_ => new Cell())
+                .Concat(new Cell(90).Yield())
+                .ToArray();
         }
 
         protected override void Present(Rect area, SerializedProperty property, GUIContent label)
         {
             var uDateTime = property.As<UDateTime>();
             var dateTime = (DateTime) uDateTime;
-            var precision = GetPrecision(property);
 
             using (new SerializedPropertyScope(area, label, property))
             {
@@ -74,14 +79,13 @@ namespace Unit.Editor.PropertyDrawers
                     using (new IndentedScope(0)) // Prevents nested fields to be indented
                     {
                         var rects = CellFramework.GetRects(3, usableArea, _cells);
-                        _year = GUIUtilities.IntField(_yearLabel.Get(compact), rects[0], dateTime.Year);
-                        _month = GUIUtilities.IntField(_monthLabel.Get(compact), rects[1], dateTime.Month);
-                        _day = GUIUtilities.IntField(_dayLabel.Get(compact), rects[2], dateTime.Day);
-                        _hour = GUIUtilities.IntField(_hourLabel.Get(compact), rects[3], dateTime.Hour);
-                        _minute = GUIUtilities.IntField(_minuteLabel.Get(compact), rects[4], dateTime.Minute);
-                        _second = GUIUtilities.IntField(_secondLabel.Get(compact), rects[5], dateTime.Second);
-                        _millisecond = GUIUtilities.IntField(_millisecondLabel.Get(compact), rects[6], dateTime.Second);
-                        _kind = (DateTimeKind) EditorGUI.EnumPopup(rects[7], dateTime.Kind);
+
+                        for (int i = 0; i < ((int) _precision) + 1; i++)
+                        {
+                            DrawField(i, rects[i], dateTime, compact);
+                        }
+                        
+                        _kind = (DateTimeKind) EditorGUI.EnumPopup(rects.Last(), dateTime.Kind);
                     }
                 }
                 var changed = EditorGUI.EndChangeCheck();
@@ -91,6 +95,20 @@ namespace Unit.Editor.PropertyDrawers
                     property.Set<UDateTime>((UDateTime) dt);
                     EditorUtility.SetDirty(property.serializedObject.targetObject);
                 }
+            }
+        }
+
+        private void DrawField(int index, Rect rect, DateTime dateTime, bool compact)
+        {
+            switch (index)
+            {
+                case 0: _year = GUIUtilities.IntField(_yearLabel.Get(compact), rect, dateTime.Year); break;
+                case 1: _month = GUIUtilities.IntField(_monthLabel.Get(compact), rect, dateTime.Month); break;
+                case 2: _day = GUIUtilities.IntField(_dayLabel.Get(compact), rect, dateTime.Day); break;
+                case 3: _hour = GUIUtilities.IntField(_hourLabel.Get(compact), rect, dateTime.Hour); break;
+                case 4: _minute = GUIUtilities.IntField(_minuteLabel.Get(compact), rect, dateTime.Minute); break;
+                case 5: _second = GUIUtilities.IntField(_secondLabel.Get(compact), rect, dateTime.Second); break;
+                case 6: _millisecond = GUIUtilities.IntField(_millisecondLabel.Get(compact), rect, dateTime.Millisecond); break;
             }
         }
 
