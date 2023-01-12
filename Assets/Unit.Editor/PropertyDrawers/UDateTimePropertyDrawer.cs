@@ -12,8 +12,6 @@ namespace Unit.Editor.PropertyDrawers
     [CustomPropertyDrawer(typeof(UDateTime))]
     public class UDateTimePropertyDrawer : UnitPropertyDrawer
     {
-        private Cell[] _cells;
-        
         private int _year;
         private int _month;
         private int _day;
@@ -23,6 +21,7 @@ namespace Unit.Editor.PropertyDrawers
         private int _millisecond;
         private DateTimeKind _kind;
 
+        private Cell[] _cells;
         private Label _yearLabel;
         private Label _monthLabel;
         private Label _dayLabel;
@@ -30,7 +29,6 @@ namespace Unit.Editor.PropertyDrawers
         private Label _minuteLabel;
         private Label _secondLabel;
         private Label _millisecondLabel;
-
         private UDateTime.Precision _precision;
 
         protected override void Initialize(SerializedProperty property)
@@ -92,6 +90,7 @@ namespace Unit.Editor.PropertyDrawers
 
                 if (changed && TryCreateValidDateTime(out var dt))
                 {
+                    Undo.RecordObject(property.serializedObject.targetObject, "UDateTime modification");
                     property.Set<UDateTime>((UDateTime) dt);
                     EditorUtility.SetDirty(property.serializedObject.targetObject);
                 }
