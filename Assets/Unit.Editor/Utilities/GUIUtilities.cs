@@ -8,7 +8,7 @@ namespace Unit.Editor.Utilities
     {
         public static int IntField(GUIContent label, Rect area, int value)
         {
-            var labelStyle = EditorStyles.label;
+            var labelStyle = new GUIStyle(EditorStyles.label);
             labelStyle.normal.textColor = Color.gray;
             var labelRect = CalculateCellLabelRect(area, label, labelStyle);
             var newValue = EditorGUI.IntField(area, GUIContent.none, value);
