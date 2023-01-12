@@ -88,7 +88,8 @@ namespace Unit.Editor.PropertyDrawers
 
                 if (changed && TryCreateValidDateTime(out var dt))
                 {
-                    Undo.RecordObject(property.serializedObject.targetObject, "UDateTime modification");
+                    Undo.RecordObject(property.serializedObject.targetObject, string.Empty);
+                    Undo.SetCurrentGroupName($"set UDateTime to ({dt:O}) in {property.serializedObject.targetObject.name}");
                     property.Set<UDateTime>((UDateTime) dt);
                     EditorUtility.SetDirty(property.serializedObject.targetObject);
                 }
